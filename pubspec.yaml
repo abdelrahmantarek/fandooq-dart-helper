@@ -1,7 +1,6 @@
 name: fandooq_helper_package
 description: A server app using the shelf package and Docker.
-version: 0.0.1
-homepage:
+version: 1.0.0
 
 environment:
   sdk: ^3.3.3
