@@ -37,6 +37,18 @@ class AvailabilityResponse extends BaseMappable{
         checkOut: json['checkOut']);
   }
 
+  static AvailabilityResponse fromHotelBeds(dynamic json){
+    var hotelsJson = json['hotels'];
+    if(hotelsJson == null){
+      return AvailabilityResponse(hotelList: []);
+    }
+    return AvailabilityResponse(
+        hotelList: json["hotels"]['hotels'] != null ? (json["hotels"]['hotels'] as List).map((e) => HotelModel.fromJson(e)).toList() : [],
+        checkIn: json["hotels"]['checkIn'],
+        total: json["hotels"]['total'],
+        checkOut: json["hotels"]['checkOut']);
+  }
+
   @override
   AvailabilityResponse fromJson(dynamic json) {
     return _fromJson(json);
