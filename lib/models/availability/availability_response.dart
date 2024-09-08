@@ -1,9 +1,10 @@
 
-
+import 'package:fandooq_helper_package/core/network_provider/networking.dart';
 
 import 'hotel/hotel.dart';
 
-class AvailabilityResponse {
+
+class AvailabilityResponse extends BaseMappable{
 
   final List<HotelModel> hotelList;
 
@@ -30,10 +31,10 @@ class AvailabilityResponse {
       return AvailabilityResponse(hotelList: []);
     }
     return AvailabilityResponse(
-        hotelList: json['hotels']['hotels'] != null ? (json['hotels']['hotels'] as List).map((e) => HotelModel.fromJson(e)).toList() : [],
-        checkIn: json['hotels']['checkIn'],
-        total: json['hotels']['total'],
-        checkOut: json['hotels']['checkOut']);
+        hotelList: json['hotels'] != null ? (json['hotels'] as List).map((e) => HotelModel.fromJson(e)).toList() : [],
+        checkIn: json['checkIn'],
+        total: json['total'],
+        checkOut: json['checkOut']);
   }
 
   @override

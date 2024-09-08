@@ -152,9 +152,9 @@ class Rate {
     var netPrice = num.parse(net ?? "0");
     var sellingPrice = num.parse(sellingRate ?? "0");
     if(sellingPrice > netPrice){
-      return Consts.commission(sellingPrice).toString();
+      return Consts.commission(sellingPrice,commission).toString();
     }
-    return Consts.commission(netPrice).toString();
+    return Consts.commission(netPrice,commission).toString();
   }
 
   Rate copyCheckRate({
