@@ -41,12 +41,13 @@ class AvailabilityResponse {
     return _fromJson(json);
   }
 
-  Map<String, dynamic> toJson() => {
-        'hotels': hotelList.map((e) => e.toJson()).toList(),
+  Map<String, dynamic> toJson({num commission = 0}) => {
+        'hotels': hotelList.map((e) => e.toJson(commission: commission)).toList(),
         'checkIn': checkIn,
         'total': total,
         'checkOut': checkOut,
       };
+
 
   AvailabilityResponse copyWith({
     List<HotelAvailabilityModel>? hotelList,
@@ -61,5 +62,6 @@ class AvailabilityResponse {
       checkOut: checkOut ?? this.checkOut,
     );
   }
+
 
 }

@@ -39,10 +39,10 @@ class RoomModel {
         id =json['id'],
         paxes = json['paxes'] != null ? List<Pax>.from(json['paxes'].map((x) => Pax.fromJson(x))) : null;
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson({num commission = 0}) => {
     'code': code,
     'name': name,
-    'rates': rates?.map((e) => e.toJson()).toList(),
+    'rates': rates?.map((e) => e.toJson(commission: commission)).toList(),
     'status': status,
     'id': id,
     'paxes': paxes?.map((x) => x.toJson()).toList(),

@@ -107,7 +107,7 @@ class HotelAvailabilityModel {
     );
   }
 
-  Map<String, dynamic> toJson() =>
+  Map<String, dynamic> toJson({num commission = 0}) =>
       {
         'code': code,
         'name': name,
@@ -119,7 +119,7 @@ class HotelAvailabilityModel {
         'zoneName': zoneName,
         'latitude': latitude,
         'longitude': longitude,
-        'rooms': rooms.map((e) => e.toJson()).toList(),
+        'rooms': rooms.map((e) => e.toJson(commission: commission)).toList(),
         'minRate': minRate,
         'maxRate': maxRate,
         'currency': currency,

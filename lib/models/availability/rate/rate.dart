@@ -1,5 +1,6 @@
 
 import 'package:collection/collection.dart';
+import 'package:fandooq_helper_package/core/const/app.dart';
 
 import '../hotel/hotel.dart';
 
@@ -31,6 +32,8 @@ class Rate {
   final List<CancellationPolicy>? cancellationPolicies;
 
   final int? rooms;
+
+  final num sellPrice;
 
   final int? adults;
 
@@ -89,6 +92,7 @@ class Rate {
     this.promotions,
     this.roomCode,
     this.sellingRate,
+    this.sellPrice = 0,
   });
 
   factory Rate.fromJson(Map<String, dynamic> json,String roomCode){
@@ -109,6 +113,7 @@ class Rate {
       rateType: json['rateType'],
       allotment: json['allotment'],
       sellingRate: json['sellingRate'],
+      sellPrice: json['sellPrice'] ?? 0,
       roomCode: roomCode,
       offers: ((json['offers'] ?? []) as List).map((x) => Offer.fromJson(x)).toList(),
       promotions: ((json['promotions'] ?? []) as List).map((x) => Promotion.fromJson(x)).toList(),
@@ -118,9 +123,11 @@ class Rate {
   }
 
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson({num commission = 0}) => {
     'rateClass': rateClass,
     'net': net,
+    'sellingRate': sellingRate,
+    'sellPrice': _buildSellRate(commission: commission),
     'rateComments': rateComments,
     'paymentType': paymentType,
     'packaging': packaging,
@@ -138,9 +145,17 @@ class Rate {
     'promotions': promotions?.map((x) => x.toJson()).toList(),
     'taxes': taxes?.toJson(),
     'roomCode': roomCode,
-    'sellingRate': sellingRate,
     'rateBreakDown': rateBreakDown?.toJson(),
   };
+
+  String _buildSellRate({num commission = 0}){
+    var netPrice = num.parse(net ?? "0");
+    var sellingPrice = num.parse(sellingRate ?? "0");
+    if(sellingPrice > netPrice){
+      return Consts.commission(sellingPrice).toString();
+    }
+    return Consts.commission(netPrice).toString();
+  }
 
   Rate copyCheckRate({
     RoomModel? roomModel,
