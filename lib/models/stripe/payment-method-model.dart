@@ -9,7 +9,7 @@ class PaymentMethodDataModel {
   final int? created;
   final String? customer;
   final bool? livemode;
-  final Map<String, dynamic>? metadata;
+  final Map<dynamic, dynamic>? metadata;
   final String? type;
 
   PaymentMethodDataModel({
@@ -111,7 +111,7 @@ class _Address {
   });
 
   // Factory method to create an instance from a JSON object
-  factory _Address.fromJson(Map<String, dynamic> json) {
+  factory _Address.fromJson(dynamic json) {
     return _Address(
       city: json['city'],
       country: json['country'],

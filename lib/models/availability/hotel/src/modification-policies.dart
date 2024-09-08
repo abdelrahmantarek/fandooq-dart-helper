@@ -1,0 +1,29 @@
+
+part of '../hotel.dart';
+
+class ModificationPolicies {
+
+  final bool cancellation;
+
+  final bool modification;
+
+  ModificationPolicies({
+    required this.cancellation,
+    required this.modification,
+  });
+
+  factory ModificationPolicies.fromJson(Map<String, dynamic> json) {
+    return ModificationPolicies(
+      cancellation: json['cancellation'] ?? false,
+      modification: json['modification'] ?? false,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'cancellation': cancellation,
+      'modification': modification,
+    };
+  }
+
+}
