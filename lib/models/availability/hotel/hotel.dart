@@ -59,7 +59,6 @@ class HotelModel {
   final int? exclusiveDeal;
 
 
-  final HotelContent? content;
 
 
 
@@ -87,7 +86,6 @@ class HotelModel {
     this.exclusiveDeal,
     this.checkIn,
     this.checkOut,
-    this.content,
   });
 
   factory HotelModel.fromJson(dynamic json){
@@ -171,7 +169,6 @@ class HotelModel {
     int? exclusiveDeal,
     String? checkIn,
     String? checkOut,
-    HotelContent? content,
   }) {
     return HotelModel(
       code: code ?? this.code,
@@ -197,7 +194,6 @@ class HotelModel {
       exclusiveDeal: exclusiveDeal ?? this.exclusiveDeal,
       checkIn: checkIn ?? this.checkIn,
       checkOut: checkOut ?? this.checkOut,
-      content: content ?? this.content,
     );
   }
 
