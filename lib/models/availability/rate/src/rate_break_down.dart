@@ -11,7 +11,7 @@ class RateBreakDown {
     this.rateDiscounts,
   });
 
-  factory RateBreakDown.fromJson(Map<String, dynamic> json) {
+  factory RateBreakDown.fromJson(dynamic json) {
     return RateBreakDown(
       rateDiscounts: (json['rateDiscounts'] as List<dynamic>?)
           ?.map((v) => RateDiscount.fromJson(v))

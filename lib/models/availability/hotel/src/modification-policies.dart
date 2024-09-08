@@ -12,7 +12,7 @@ class ModificationPolicies {
     required this.modification,
   });
 
-  factory ModificationPolicies.fromJson(Map<String, dynamic> json) {
+  factory ModificationPolicies.fromJson(dynamic json) {
     return ModificationPolicies(
       cancellation: json['cancellation'] ?? false,
       modification: json['modification'] ?? false,

@@ -11,7 +11,7 @@ class CreditCardModel {
 
   CreditCardModel({this.code, this.name, this.paymentType});
 
-  CreditCardModel.fromJson(Map<String, dynamic> json)
+  CreditCardModel.fromJson(dynamic json)
       : code = json['code'],
         name = json['name'],
         paymentType = json['paymentType'];

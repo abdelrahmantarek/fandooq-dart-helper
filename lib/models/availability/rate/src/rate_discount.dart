@@ -15,7 +15,7 @@ class RateDiscount {
     required this.amount,
   });
 
-  factory RateDiscount.fromJson(Map<String, dynamic> json) {
+  factory RateDiscount.fromJson(dynamic json) {
     return RateDiscount(
       code: json['code'],
       name: json['name'],

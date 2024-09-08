@@ -21,7 +21,7 @@ class PaymentIntentRequest {
   });
 
   // دالة fromJson لتحويل JSON إلى كائن Dart
-  factory PaymentIntentRequest.fromJson(Map<String, dynamic> json) {
+  factory PaymentIntentRequest.fromJson(dynamic json) {
     return PaymentIntentRequest(
       amount: json['amount'],
       currency: json['currency'],

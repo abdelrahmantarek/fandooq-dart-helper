@@ -13,7 +13,7 @@ class Promotion {
   });
 
   // Factory constructor to create a Promotion from JSON
-  factory Promotion.fromJson(Map<String, dynamic> json) {
+  factory Promotion.fromJson(dynamic json) {
     return Promotion(
       code: json['code'],
       name: json['name'],

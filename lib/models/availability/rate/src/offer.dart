@@ -15,7 +15,7 @@ class Offer {
     this.amount,
   });
 
-  factory Offer.fromJson(Map<String, dynamic> json) {
+  factory Offer.fromJson(dynamic json) {
     return Offer(
       code: json['code'],
       name: json['name'],

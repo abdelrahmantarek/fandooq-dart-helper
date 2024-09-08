@@ -10,7 +10,7 @@ class Taxes {
     required this.allIncluded,
   });
 
-  factory Taxes.fromJson(Map<String, dynamic> json) => Taxes(
+  factory Taxes.fromJson(dynamic json) => Taxes(
     taxes: List<Tax>.from(json['taxes'].map((x) => Tax.fromJson(x))),
     allIncluded: json['allIncluded'],
   );
@@ -67,7 +67,7 @@ class Tax {
     required this.clientCurrency,
   });
 
-  factory Tax.fromJson(Map<String, dynamic> json){
+  factory Tax.fromJson(dynamic json){
     return Tax(
       included: json['included'],
       amount: json['amount'].toString().beNum,

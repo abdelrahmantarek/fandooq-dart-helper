@@ -31,7 +31,7 @@ class RoomModel {
         element.rooms == rooms).isNotEmpty;
   }
 
-  RoomModel.fromJson(Map<String, dynamic> json)
+  RoomModel.fromJson(dynamic json)
       : code = json['code'],
         name = json['name'],
         rates = ((json['rates'] ?? []) as List).map((e) => Rate.fromJson(e,json["code"].toString())).toList(),

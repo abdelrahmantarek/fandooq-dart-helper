@@ -33,7 +33,7 @@ class Rate {
 
   final int? rooms;
 
-  final num sellPrice;
+  final String sellPrice;
 
   final int? adults;
 
@@ -92,7 +92,7 @@ class Rate {
     this.promotions,
     this.roomCode,
     this.sellingRate,
-    this.sellPrice = 0,
+    this.sellPrice = "0",
   });
 
   factory Rate.fromJson(Map<String, dynamic> json,String roomCode){
@@ -113,7 +113,7 @@ class Rate {
       rateType: json['rateType'],
       allotment: json['allotment'],
       sellingRate: json['sellingRate'],
-      sellPrice: json['sellPrice'] ?? 0,
+      sellPrice: json['sellPrice'] ?? "0",
       roomCode: roomCode,
       offers: ((json['offers'] ?? []) as List).map((x) => Offer.fromJson(x)).toList(),
       promotions: ((json['promotions'] ?? []) as List).map((x) => Promotion.fromJson(x)).toList(),

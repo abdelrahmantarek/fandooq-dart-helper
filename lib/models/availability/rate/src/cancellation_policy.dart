@@ -9,7 +9,7 @@ class CancellationPolicy {
 
   CancellationPolicy({this.amount, this.from});
 
-  CancellationPolicy.fromJson(Map<String, dynamic> json)
+  CancellationPolicy.fromJson(dynamic json)
       : amount = json['amount'],
         from = json['from'];
 

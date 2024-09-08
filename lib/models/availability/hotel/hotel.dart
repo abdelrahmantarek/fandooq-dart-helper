@@ -1,13 +1,16 @@
 
 import 'package:fandooq_helper_package/models/availability/rate/rate.dart';
 
+import '../../content/hotel.dart';
+import '../booking/booking.dart';
+
 part 'src/credit_card_model.dart';
 part 'src/modification-policies.dart';
 part 'src/room.dart';
 part 'src/promotion.dart';
 
 
-class HotelAvailabilityModel {
+class HotelModel {
 
   final int code;
 
@@ -18,6 +21,10 @@ class HotelAvailabilityModel {
   final String? categoryName;
 
   final String? destinationCode;
+
+  final String? checkIn;
+
+  final String? checkOut;
 
   final String? destinationName;
 
@@ -52,10 +59,11 @@ class HotelAvailabilityModel {
   final int? exclusiveDeal;
 
 
+  final HotelContent? content;
 
 
 
-  HotelAvailabilityModel({
+  HotelModel({
     required this.code,
     this.name,
     this.categoryCode,
@@ -77,20 +85,25 @@ class HotelAvailabilityModel {
     this.paymentDataRequired = false,
     this.modificationPolicies,
     this.exclusiveDeal,
+    this.checkIn,
+    this.checkOut,
+    this.content,
   });
 
-  factory HotelAvailabilityModel.fromJson(Map<String, dynamic> json){
-    return HotelAvailabilityModel(
+  factory HotelModel.fromJson(dynamic json){
+    return HotelModel(
       code: json['code'],
       name: json['name'],
+      checkIn: json['checkIn'],
+      checkOut: json['checkOut'],
       categoryCode: json['categoryCode'],
       categoryName: json['categoryName'],
       destinationCode: json['destinationCode'],
       destinationName: json['destinationName'],
       zoneCode: json['zoneCode'],
       zoneName: json['zoneName'],
-      latitude: json['latitude'],
-      longitude: json['longitude'],
+      latitude: json['latitude'].toString(),
+      longitude: json['longitude'].toString(),
       rooms: List<RoomModel>.from(json['rooms'].map((x) => RoomModel.fromJson(x))),
       minRate: json['minRate'],
       maxRate: json['maxRate'],
@@ -111,6 +124,8 @@ class HotelAvailabilityModel {
       {
         'code': code,
         'name': name,
+        'checkIn': checkIn,
+        'checkOut': checkOut,
         'categoryCode': categoryCode,
         'categoryName': categoryName,
         'destinationCode': destinationCode,
@@ -132,7 +147,7 @@ class HotelAvailabilityModel {
         'exclusiveDeal': exclusiveDeal,
       };
 
-  HotelAvailabilityModel copyWith({
+  HotelModel copyWith({
     int? code,
     String? name,
     String? categoryCode,
@@ -154,8 +169,11 @@ class HotelAvailabilityModel {
     bool? paymentDataRequired,
     ModificationPolicies? modificationPolicies,
     int? exclusiveDeal,
+    String? checkIn,
+    String? checkOut,
+    HotelContent? content,
   }) {
-    return HotelAvailabilityModel(
+    return HotelModel(
       code: code ?? this.code,
       name: name ?? this.name,
       categoryCode: categoryCode ?? this.categoryCode,
@@ -177,6 +195,9 @@ class HotelAvailabilityModel {
       paymentDataRequired: paymentDataRequired ?? this.paymentDataRequired,
       modificationPolicies: modificationPolicies ?? this.modificationPolicies,
       exclusiveDeal: exclusiveDeal ?? this.exclusiveDeal,
+      checkIn: checkIn ?? this.checkIn,
+      checkOut: checkOut ?? this.checkOut,
+      content: content ?? this.content,
     );
   }
 
@@ -184,7 +205,7 @@ class HotelAvailabilityModel {
 
   @override
   bool operator ==(dynamic other) => identical(this, other) ||
-      other is HotelAvailabilityModel &&
+      other is HotelModel &&
           runtimeType == other.runtimeType &&
           code == other.code;
 

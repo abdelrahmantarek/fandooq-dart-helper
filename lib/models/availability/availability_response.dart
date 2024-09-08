@@ -5,7 +5,7 @@ import 'hotel/hotel.dart';
 
 class AvailabilityResponse {
 
-  final List<HotelAvailabilityModel> hotelList;
+  final List<HotelModel> hotelList;
 
   final String? checkIn;
 
@@ -20,24 +20,24 @@ class AvailabilityResponse {
     this.checkOut,
   });
 
-  factory AvailabilityResponse.fromJson(Map<String, dynamic> json) {
+  factory AvailabilityResponse.fromJson(dynamic json) {
     return _fromJson(json);
   }
 
-  static AvailabilityResponse _fromJson(Map<String, dynamic> json){
+  static AvailabilityResponse _fromJson(dynamic json){
     var hotelsJson = json['hotels'];
     if(hotelsJson == null){
       return AvailabilityResponse(hotelList: []);
     }
     return AvailabilityResponse(
-        hotelList: json['hotels']['hotels'] != null ? (json['hotels']['hotels'] as List).map((e) => HotelAvailabilityModel.fromJson(e)).toList() : [],
+        hotelList: json['hotels']['hotels'] != null ? (json['hotels']['hotels'] as List).map((e) => HotelModel.fromJson(e)).toList() : [],
         checkIn: json['hotels']['checkIn'],
         total: json['hotels']['total'],
         checkOut: json['hotels']['checkOut']);
   }
 
   @override
-  AvailabilityResponse fromJson(Map<String, dynamic> json) {
+  AvailabilityResponse fromJson(dynamic json) {
     return _fromJson(json);
   }
 
@@ -50,7 +50,7 @@ class AvailabilityResponse {
 
 
   AvailabilityResponse copyWith({
-    List<HotelAvailabilityModel>? hotelList,
+    List<HotelModel>? hotelList,
     String? checkIn,
     int? total,
     String? checkOut,
