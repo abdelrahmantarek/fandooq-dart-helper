@@ -1,6 +1,8 @@
 
 
 
+import 'package:fandooq_helper_package/models/content/hotel.dart';
+
 part 'src/accommodation_type.dart';
 part 'src/board.dart';
 part 'src/category.dart';
@@ -10,7 +12,6 @@ part 'src/content_and_language.dart';
 part 'src/coordinates.dart';
 part 'src/country.dart';
 part 'src/destination.dart';
-part 'src/facility.dart';
 part 'src/hotels.dart';
 part 'src/images.dart';
 part 'src/interest_point.dart';
@@ -28,6 +29,7 @@ part 'src/zone.dart';
 part 'src/search-able.dart';
 part 'src/state.dart';
 part 'src/facilities_group.dart';
+part 'src/facility.dart';
 
 
 

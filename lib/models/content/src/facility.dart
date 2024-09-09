@@ -48,28 +48,28 @@ class Facility extends Searchable{
   final bool mostPopular;
 
   Facility({
-     this.ageFrom,
-     this.ageTo,
-     this.amount = 0,
-     this.applicationType,
-     this.currency,
-     this.dateFrom,
-     this.dateTo,
-     this.description,
-     this.distance,
-     this.facilityCode,
-     this.facilityGroupCode,
-     this.facilityName,
-     this.indFee = false,
-     this.indLogic = false,
-     this.indYesOrNo = false,
-     this.number = 0,
-     this.order = 0,
-     this.timeFrom,
-     this.timeTo,
-     this.voucher = false,
-     this.icon,
-     this.mostPopular = false,
+    this.ageFrom,
+    this.ageTo,
+    this.amount = 0,
+    this.applicationType,
+    this.currency,
+    this.dateFrom,
+    this.dateTo,
+    this.description,
+    this.distance,
+    this.facilityCode,
+    this.facilityGroupCode,
+    this.facilityName,
+    this.indFee = false,
+    this.indLogic = false,
+    this.indYesOrNo = false,
+    this.number = 0,
+    this.order = 0,
+    this.timeFrom,
+    this.timeTo,
+    this.voucher = false,
+    this.icon,
+    this.mostPopular = false,
   });
 
   factory Facility.fromJson(dynamic json) {
@@ -81,7 +81,7 @@ class Facility extends Searchable{
       currency: json['currency'],
       dateFrom: json['dateFrom'],
       dateTo: json['dateTo'],
-      description: json['description'] != null ? ContentAndLanguage.fromJson(json['description'] as Map<String, dynamic>) : null,
+      description: json['description'] != null ? ContentAndLanguage.fromJson(json['description']) : null,
       distance: json['distance'],
       facilityCode: json['facilityCode'] ?? json["code"],
       facilityGroupCode: json['facilityGroupCode'],
@@ -187,14 +187,6 @@ class Facility extends Searchable{
   }
 
 
-  String getName() {
-    return "";
-    // var data = Repos.settings.getLocalFacilities(this);
-    // return [
-    //   data?.description?.content ?? description?.content ?? "$facilityCode$facilityGroupCode".tr,
-    //   if(restOfDetails.isNotEmpty) restOfDetails,
-    // ].join(" ");
-  }
 
 
   String get restOfDetails{
@@ -246,16 +238,20 @@ class Facility extends Searchable{
     return list.join(" ");
   }
 
-  String getNameForVoucher() {
-    return getName();
-  }
 
   @override
   String get getText {
-    return getName();
     // TODO: implement getText
     return description?.content ?? "";
   }
+
+
+  //
+  // String? get getIcon {
+  //   var data = facilitiesAr.lookup(this);
+  //   if(data?.icon != null) return "assets/facilities/${data?.icon}";
+  //   return null;
+  // }
 
 
   bool get isWifi => facilityCode == 550 && facilityGroupCode == 70;
@@ -318,6 +314,7 @@ class Facility extends Searchable{
   }
 
 }
+
 
 
 

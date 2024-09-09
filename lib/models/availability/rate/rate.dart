@@ -191,6 +191,7 @@ class Rate {
     String? rateCommentsId,
     String? roomCode,
     String? sellingRate,
+    num? sellPrice,
     Taxes? taxes,
   }) {
     return Rate(
@@ -217,6 +218,7 @@ class Rate {
       roomCode: roomCode ?? this.roomCode,
       taxes: taxes ?? this.taxes,
       sellingRate: sellingRate ?? this.sellingRate,
+      sellPrice: sellPrice ?? this.sellPrice,
     );
   }
 
