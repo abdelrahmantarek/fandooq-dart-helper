@@ -81,10 +81,10 @@ class BookingInvoiceData {
 }
 
 class UserPayDetails {
-  final double subtotal;
-  final double grandTotal;
-  final String currency;
-  final List<RateDiscount> rateDiscounts;
+  final String? subtotal;
+  final String? grandTotal;
+  final String? currency;
+  final List<RateDiscount>? rateDiscounts;
 
   UserPayDetails({
     required this.subtotal,
@@ -99,9 +99,7 @@ class UserPayDetails {
       subtotal: json['subtotal'],
       grandTotal: json['grandTotal'],
       currency: json['currency'],
-      rateDiscounts: List<RateDiscount>.from(
-        json['rateDiscounts'].map((e) => RateDiscount.fromJson(e)),
-      ),
+      rateDiscounts: ((json['rateDiscounts'] ?? []) as List).map((e)=> RateDiscount.fromJson(e)).toList(),
     );
   }
 
@@ -111,14 +109,14 @@ class UserPayDetails {
       'subtotal': subtotal,
       'grandTotal': grandTotal,
       'currency': currency,
-      'rateDiscounts': rateDiscounts.map((e) => e.toJson()).toList(),
+      'rateDiscounts': rateDiscounts?.map((e) => e.toJson()).toList(),
     };
   }
 
   // دالة copyWith لإنشاء نسخة جديدة من الكائن مع إمكانية تعديل بعض الخصائص
   UserPayDetails copyWith({
-    double? subtotal,
-    double? grandTotal,
+    String? subtotal,
+    String? grandTotal,
     String? currency,
     List<RateDiscount>? rateDiscounts,
   }) {
