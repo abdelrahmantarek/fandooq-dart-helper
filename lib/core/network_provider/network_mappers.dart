@@ -17,7 +17,7 @@ abstract class Mappable<T> {
     // check if the type is a bool
     if (type is BaseMappable) {
       Map<String, dynamic> mappingData = json.decode(data.toString());
-
+      print("dddddd ${mappingData.toString()}");
       return type.fromJson(mappingData) as Mappable<T>;
     }
 

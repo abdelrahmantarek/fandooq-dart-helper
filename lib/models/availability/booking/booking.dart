@@ -15,6 +15,7 @@ part 'src/payment-data.dart';
 part 'src/room-request-booking.dart';
 part 'src/user-type.dart';
 part 'src/invoice_company.dart';
+part 'src/invoice-data-after-pay.dart';
 
 
 
@@ -47,6 +48,8 @@ class Booking{
 
   final HotelContent? content;
 
+  final BookingInvoiceData? bookingInvoiceData;
+
   Booking({
     this.reference,
     this.clientReference,
@@ -61,6 +64,7 @@ class Booking{
     this.pendingAmount,
     this.currency,
     this.content,
+    this.bookingInvoiceData,
   });
 
 
@@ -89,6 +93,7 @@ class Booking{
     double? pendingAmount,
     String? currency,
     HotelContent? content,
+    BookingInvoiceData? bookingInvoiceData,
   }) => Booking(
     reference: reference ?? this.reference,
     clientReference: clientReference ?? this.clientReference,
@@ -103,6 +108,7 @@ class Booking{
     pendingAmount: pendingAmount ?? this.pendingAmount,
     currency: currency ?? this.currency,
     content: content ?? this.content,
+    bookingInvoiceData: bookingInvoiceData ?? this.bookingInvoiceData,
   );
 
 
@@ -121,6 +127,7 @@ class Booking{
       pendingAmount: json['pendingAmount']?.toDouble(),
       currency: json['currency'],
       content: json['content'] != null ? HotelContent.fromJson(json['content'][0]) : null,
+      bookingInvoiceData: json['userPay'] != null ? BookingInvoiceData.fromJson(json['userPay'][0]) : null,
     );
   }
 
@@ -138,6 +145,7 @@ class Booking{
     'pendingAmount': pendingAmount,
     'currency': currency,
     'content': content?.toJson(),
+    'bookingInvoiceData': bookingInvoiceData?.toJson(),
   };
 
 
