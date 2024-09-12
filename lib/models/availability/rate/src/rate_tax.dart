@@ -50,11 +50,11 @@ class Taxes {
 class Tax {
 
   bool included;
-  num amount;
+  String amount;
   String currency;
   String? type;
   String? subType;
-  num? clientAmount;
+  String? clientAmount;
   String? clientCurrency;
 
   Tax({
@@ -70,11 +70,11 @@ class Tax {
   factory Tax.fromJson(dynamic json){
     return Tax(
       included: json['included'],
-      amount: json['amount'].toString().beNum,
-      currency: json['currency'],
-      type: json['type'],
-      subType: json['subType'],
-      clientAmount: 0,
+      amount: json['amount'].toString(),
+      currency: json['currency'].toString(),
+      type: json['type'].toString(),
+      subType: json['subType'].toString(),
+      clientAmount: "0",
       clientCurrency: json['clientCurrency']
       // clientAmount: json['clientAmount'].toString().beNum,
       // clientCurrency: json['clientCurrency'],
@@ -82,6 +82,26 @@ class Tax {
   }
 
 
+  // إضافة دالة copyWith
+  Tax copyWith({
+    bool? included,
+    String? amount,
+    String? currency,
+    String? type,
+    String? subType,
+    String? clientAmount,
+    String? clientCurrency,
+  }) {
+    return Tax(
+      included: included ?? this.included,
+      amount: amount ?? this.amount,
+      currency: currency ?? this.currency,
+      type: type ?? this.type,
+      subType: subType ?? this.subType,
+      clientAmount: clientAmount ?? this.clientAmount,
+      clientCurrency: clientCurrency ?? this.clientCurrency,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
     'included': included,
@@ -116,6 +136,7 @@ class Tax {
   String getName({num? amount}) {
     return subType ?? "estimated taxes and fees for this booking $amount $currency payable on arrival";
   }
+
 
 }
 

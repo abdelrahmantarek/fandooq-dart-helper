@@ -9,17 +9,21 @@ class RateDiscount {
 
   final String amount;
 
+  final String? currency;
+
   RateDiscount({
     required this.code,
     required this.name,
     required this.amount,
+    required this.currency,
   });
 
-  factory RateDiscount.fromJson(dynamic json) {
+  factory RateDiscount.fromJson(dynamic json,{String? currency}) {
     return RateDiscount(
       code: json['code'],
       name: json['name'],
       amount: json['amount'],
+      currency: json['currency'],
     );
   }
 
@@ -28,6 +32,7 @@ class RateDiscount {
     data['code'] = code;
     data['name'] = name;
     data['amount'] = amount;
+    data['currency'] = currency;
     return data;
   }
 
@@ -36,11 +41,13 @@ class RateDiscount {
     String? code,
     String? name,
     String? amount,
+    String? currency,
   }) {
     return RateDiscount(
       code: code ?? this.code,
       name: name ?? this.name,
       amount: amount ?? this.amount,
+      currency: currency ?? this.currency,
     );
   }
 
@@ -67,3 +74,4 @@ class RateDiscount {
               code == other.code;
 
 }
+
