@@ -3,6 +3,7 @@ part of '../booking.dart';
 
 
 class BookingInvoiceData {
+
   final String reference;
   final String clientReference;
   final String createAt;
