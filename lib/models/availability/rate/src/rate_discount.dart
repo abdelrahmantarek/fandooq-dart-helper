@@ -15,7 +15,7 @@ class RateDiscount {
     required this.code,
     required this.name,
     required this.amount,
-    required this.currency,
+    this.currency,
   });
 
   factory RateDiscount.fromJson(dynamic json,{String? currency}) {
