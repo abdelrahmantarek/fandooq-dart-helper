@@ -19,6 +19,7 @@ class BookingInvoiceData {
 
   // دالة fromJson لتحويل البيانات القادمة من JSON إلى كائن Dart
   factory BookingInvoiceData.fromJson(Map<String, dynamic> json) {
+    print("referencereferencereferencereference  "+json['reference']);
     return BookingInvoiceData(
       reference: json['reference'],
       clientReference: json['clientReference'],
@@ -83,14 +84,16 @@ class BookingInvoiceData {
 class UserPayDetails {
   final String? subtotal;
   final String? grandTotal;
-  final String? currency;
+  final String? currencyHotel;
+  final String? currencyUserView;
   final List<RateDiscount>? rateDiscounts;
 
   UserPayDetails({
     required this.subtotal,
     required this.grandTotal,
-    required this.currency,
     required this.rateDiscounts,
+    required this.currencyUserView,
+    required this.currencyHotel,
   });
 
   // دالة fromJson لتحويل البيانات القادمة من JSON إلى كائن Dart
@@ -98,7 +101,8 @@ class UserPayDetails {
     return UserPayDetails(
       subtotal: json['subtotal'],
       grandTotal: json['grandTotal'],
-      currency: json['currency'],
+      currencyHotel: json['currencyHotel'],
+      currencyUserView: json['currencyUserView'],
       rateDiscounts: ((json['rateDiscounts'] ?? []) as List).map((e)=> RateDiscount.fromJson(e)).toList(),
     );
   }
@@ -108,7 +112,8 @@ class UserPayDetails {
     return {
       'subtotal': subtotal,
       'grandTotal': grandTotal,
-      'currency': currency,
+      'currencyHotel': currencyHotel,
+      'currencyUserView': currencyUserView,
       'rateDiscounts': rateDiscounts?.map((e) => e.toJson()).toList(),
     };
   }
@@ -117,33 +122,17 @@ class UserPayDetails {
   UserPayDetails copyWith({
     String? subtotal,
     String? grandTotal,
-    String? currency,
+    String? currencyHotel,
+    String? currencyUserView,
     List<RateDiscount>? rateDiscounts,
   }) {
     return UserPayDetails(
       subtotal: subtotal ?? this.subtotal,
       grandTotal: grandTotal ?? this.grandTotal,
-      currency: currency ?? this.currency,
+      currencyHotel: currencyHotel ?? this.currencyHotel,
+      currencyUserView: currencyUserView ?? this.currencyUserView,
       rateDiscounts: rateDiscounts ?? this.rateDiscounts,
     );
   }
 
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is UserPayDetails &&
-        other.subtotal == subtotal &&
-        other.grandTotal == grandTotal &&
-        other.currency == currency &&
-        other.rateDiscounts == rateDiscounts;
-  }
-
-  @override
-  int get hashCode {
-    return subtotal.hashCode ^
-    grandTotal.hashCode ^
-    currency.hashCode ^
-    rateDiscounts.hashCode;
-  }
 }
