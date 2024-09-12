@@ -7,25 +7,28 @@ class BookingInvoiceData {
   final String reference;
   final String clientReference;
   final String createAt;
-  final UserPayDetails userPayDetails;
+  final UserPayDetails priceInvoice;
+  final UserPayDetails priceHotel;
   final String paymentIntentId;
 
   BookingInvoiceData({
     required this.reference,
     required this.clientReference,
     required this.createAt,
-    required this.userPayDetails,
+    required this.priceInvoice,
+    required this.priceHotel,
     required this.paymentIntentId,
   });
 
   // دالة fromJson لتحويل البيانات القادمة من JSON إلى كائن Dart
   factory BookingInvoiceData.fromJson(Map<String, dynamic> json) {
-    print("referencereferencereferencereference  "+json['reference']);
+    print("referencereferencereferencereference  "+json.keys.toString());
     return BookingInvoiceData(
       reference: json['reference'],
       clientReference: json['clientReference'],
       createAt: json['createAt'],
-      userPayDetails: UserPayDetails.fromJson(json['userPayDetails']),
+      priceInvoice: UserPayDetails.fromJson(json['priceInvoice']),
+      priceHotel: UserPayDetails.fromJson(json['priceHotel']),
       paymentIntentId: json['paymentIntentId'],
     );
   }
@@ -36,7 +39,8 @@ class BookingInvoiceData {
       'reference': reference,
       'clientReference': clientReference,
       'createAt': createAt,
-      'userPayDetails': userPayDetails.toJson(),
+      'priceInvoice': priceInvoice.toJson(),
+      'priceHotel': priceHotel.toJson(),
       'paymentIntentId': paymentIntentId,
     };
   }
@@ -46,15 +50,17 @@ class BookingInvoiceData {
     String? reference,
     String? clientReference,
     String? createAt,
-    UserPayDetails? userPayDetails,
+    UserPayDetails? priceInvoice,
+    UserPayDetails? priceHotel,
     String? paymentIntentId,
   }) {
     return BookingInvoiceData(
       reference: reference ?? this.reference,
       clientReference: clientReference ?? this.clientReference,
       createAt: createAt ?? this.createAt,
-      userPayDetails: userPayDetails ?? this.userPayDetails,
       paymentIntentId: paymentIntentId ?? this.paymentIntentId,
+      priceInvoice: priceInvoice ?? this.priceInvoice,
+      priceHotel: priceHotel ?? this.priceHotel,
     );
   }
 
@@ -67,7 +73,6 @@ class BookingInvoiceData {
         other.reference == reference &&
         other.clientReference == clientReference &&
         other.createAt == createAt &&
-        other.userPayDetails == userPayDetails &&
         other.paymentIntentId == paymentIntentId;
   }
 
@@ -77,7 +82,6 @@ class BookingInvoiceData {
     return reference.hashCode ^
     clientReference.hashCode ^
     createAt.hashCode ^
-    userPayDetails.hashCode ^
     paymentIntentId.hashCode;
   }
 }
