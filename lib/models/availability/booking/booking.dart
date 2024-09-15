@@ -17,9 +17,6 @@ part 'src/user-type.dart';
 part 'src/invoice_company.dart';
 part 'src/invoice-data-after-pay.dart';
 
-
-
-
 class Booking{
 
   final String? reference;
@@ -50,6 +47,9 @@ class Booking{
 
   final BookingInvoiceData? bookingInvoiceData;
 
+  final DateTime? createAt;
+
+
   Booking({
     this.reference,
     this.clientReference,
@@ -65,6 +65,7 @@ class Booking{
     this.currency,
     this.content,
     this.bookingInvoiceData,
+    this.createAt,
   });
 
 
@@ -94,6 +95,7 @@ class Booking{
     String? currency,
     HotelContent? content,
     BookingInvoiceData? bookingInvoiceData,
+    DateTime? createAt,
   }) => Booking(
     reference: reference ?? this.reference,
     clientReference: clientReference ?? this.clientReference,
@@ -109,6 +111,7 @@ class Booking{
     currency: currency ?? this.currency,
     content: content ?? this.content,
     bookingInvoiceData: bookingInvoiceData ?? this.bookingInvoiceData,
+    createAt: createAt ?? this.createAt,
   );
 
 
@@ -128,6 +131,7 @@ class Booking{
       currency: json['currency'],
       content: json['content'] != null ? HotelContent.fromJson(json['content'][0]) : null,
       bookingInvoiceData: json['userPay'] != null ? BookingInvoiceData.fromJson(json['userPay'][0]) : null,
+      createAt: json['createAt'] != null ? DateTime.parse(json['createAt']) : null,
     );
   }
 
@@ -146,6 +150,7 @@ class Booking{
     'currency': currency,
     'content': content?.toJson(),
     'bookingInvoiceData': bookingInvoiceData?.toJson(),
+    'createAt': createAt?.toString(),
   };
 
 
