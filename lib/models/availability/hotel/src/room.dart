@@ -48,6 +48,22 @@ class RoomModel {
     'paxes': paxes?.map((x) => x.toJson()).toList(),
   };
 
+  Map<String, dynamic> toJsonOption1({num commission = 0}) => {
+    'code': code,
+    'rates': rates?.map((e) => e.toJsonOption1(commission: commission)).toList(),
+  };
+
+  String toJsonCompress({num commission = 0}) {
+    return [
+          code,
+          name,
+          rates?.map((e) => e.toJsonCompress(commission: commission)).toRed("Rates"),
+          status,
+          id,
+          paxes?.map((x) => x.toJsonCompress()).toRed("Paxes"),
+    ].join(",");
+  }
+
   RoomModel copyWith({
     String? code,
     String? name,

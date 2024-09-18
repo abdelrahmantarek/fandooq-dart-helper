@@ -1,4 +1,5 @@
 
+import 'package:fandooq_helper_package/core/ex/hotels.dart';
 import 'package:fandooq_helper_package/models/availability/rate/rate.dart';
 
 import '../../content/hotel.dart';
@@ -38,6 +39,8 @@ class HotelModel {
 
   final List<RoomModel> rooms;
 
+  final List<Rate> rates;
+
   final String? minRate;
 
   final String? maxRate;
@@ -74,6 +77,7 @@ class HotelModel {
     this.latitude,
     this.longitude,
     this.rooms = const [],
+    this.rates = const [],
     this.minRate,
     this.maxRate,
     this.currency,
@@ -103,6 +107,7 @@ class HotelModel {
       latitude: json['latitude'].toString(),
       longitude: json['longitude'].toString(),
       rooms: List<RoomModel>.from(json['rooms'].map((x) => RoomModel.fromJson(x))),
+      rates: ((json["rates"] ?? []) as List).map((x) => Rate.fromJson(x)).toList(),
       minRate: json['minRate'],
       maxRate: json['maxRate'],
       currency: json['currency'],
@@ -117,6 +122,20 @@ class HotelModel {
       exclusiveDeal: json['exclusiveDeal'],
     );
   }
+
+
+  Map<String, dynamic> toJsonOption1({num commission = 0}) =>
+      {
+        'code': code,
+        'name': name,
+        'categoryCode': categoryCode,
+        'latitude': latitude,
+        'longitude': longitude,
+        'rates': rooms.map((e) => e.rates).expand((a)=> a!).map((e)=>e.toJsonOption1()).toList(),
+        'currency': currency,
+        'exclusiveDeal': exclusiveDeal,
+      };
+
 
   Map<String, dynamic> toJson({num commission = 0}) =>
       {
@@ -144,6 +163,34 @@ class HotelModel {
         'modificationPolicies': modificationPolicies?.toJson(),
         'exclusiveDeal': exclusiveDeal,
       };
+
+  String toJsonCompress({num commission = 0}) {
+    return [
+      code,
+      name,
+      checkIn,
+      checkOut,
+      categoryCode,
+      categoryName,
+      destinationCode,
+      destinationName,
+      zoneCode,
+      zoneName,
+      latitude,
+      longitude,
+      rooms.map((e) => e.toJsonCompress(commission: commission)).toRed("Rooms"),
+      minRate,
+      maxRate,
+      currency,
+      creditCards.map((e) => e.toJsonCompress()).toRed("CreditCards"),
+      totalNet,
+      paymentDataRequired,
+      modificationPolicies?.toJsonCompress() ?? '',
+      exclusiveDeal
+    ].join(",");
+  }
+
+
 
   HotelModel copyWith({
     int? code,

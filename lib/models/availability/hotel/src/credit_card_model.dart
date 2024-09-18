@@ -22,6 +22,12 @@ class CreditCardModel {
         'paymentType': paymentType,
       };
 
+  List<dynamic> toJsonCompress() => [
+         code,
+        name,
+         paymentType,
+      ];
+
   CreditCardModel copyWith({
     String? code,
     String? name,

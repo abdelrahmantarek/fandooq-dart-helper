@@ -26,4 +26,12 @@ class RateBreakDown {
     }
     return data;
   }
+
+  String toJsonCompress() {
+    return [
+      rateDiscounts?.map((v) => v.toJsonCompress()).toRed("RateBreakDown")
+    ].join(",");
+  }
+
+
 }

@@ -41,4 +41,12 @@ class Pax {
     'name': name,
     'surname': surname,
   };
+
+  String toJsonCompress() => [
+    roomId,
+    type,
+    name,
+    surname,
+  ].join(",");
+
 }

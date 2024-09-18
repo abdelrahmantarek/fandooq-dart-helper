@@ -30,4 +30,13 @@ class Offer {
     data['amount'] = amount;
     return data;
   }
+
+  String toJsonCompress() {
+    return [
+      code,
+      name,
+      amount
+    ].join(",");
+  }
+
 }

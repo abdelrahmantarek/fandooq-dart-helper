@@ -30,6 +30,14 @@ class Promotion {
     };
   }
 
+  String toJsonCompress() {
+    return [
+      code,
+      name,
+      remark
+    ].join(",");
+  }
+
   @override
   String toString() {
     return 'Promotion(code: $code, name: $name, remark: $remark)';

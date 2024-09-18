@@ -1,4 +1,5 @@
 
+import 'package:fandooq_helper_package/core/ex/hotels.dart';
 import 'package:fandooq_helper_package/core/network_provider/networking.dart';
 
 import 'hotel/hotel.dart';
@@ -61,6 +62,19 @@ class AvailabilityResponse extends BaseMappable{
         'checkOut': checkOut,
       };
 
+  Map<String, dynamic> toJsonOption1({num commission = 0}) => {
+    'hotels': hotelList.map((e) => e.toJsonOption1(commission: commission)).toList(),
+    'checkIn': checkIn,
+    'total': total,
+    'checkOut': checkOut,
+  };
+
+  String toJsonCompress({num commission = 0}) => [
+    hotelList.map((e) => e.toJsonCompress(commission: commission)).toRed("HOT"),
+    checkIn,
+    total,
+    checkOut,
+  ].join(",");
 
   AvailabilityResponse copyWith({
     List<HotelModel>? hotelList,

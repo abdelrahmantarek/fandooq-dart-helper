@@ -20,6 +20,11 @@ class Taxes {
     'allIncluded': allIncluded,
   };
 
+  String toJsonCompress() => [
+    taxes.map((x) => x.toJsonCompress()).toRed("Taxes"),
+    allIncluded
+  ].join(",");
+
   Taxes copyWith({
     List<Tax>? taxes,
     bool? allIncluded,
@@ -112,6 +117,16 @@ class Tax {
     'clientAmount': clientAmount,
     'clientCurrency': clientCurrency,
   };
+
+  String toJsonCompress() => [
+    included,
+    amount,
+    currency,
+    type,
+    subType,
+    clientAmount,
+    clientCurrency,
+  ].join(",");
 
   @override
   bool operator ==(Object other) {

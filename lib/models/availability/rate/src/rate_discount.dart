@@ -36,6 +36,15 @@ class RateDiscount {
     return data;
   }
 
+  String toJsonCompress() {
+    return [
+      code,
+      name,
+      amount,
+      currency
+    ].join(",");
+  }
+
   // copyWith method
   RateDiscount copyWith({
     String? code,

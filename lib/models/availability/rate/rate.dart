@@ -1,6 +1,7 @@
 
 import 'package:collection/collection.dart';
 import 'package:fandooq_helper_package/core/const/app.dart';
+import 'package:fandooq_helper_package/core/ex/hotels.dart';
 
 import '../hotel/hotel.dart';
 
@@ -95,7 +96,7 @@ class Rate {
     this.sellPrice = 0,
   });
 
-  factory Rate.fromJson(Map<String, dynamic> json,String roomCode){
+  factory Rate.fromJson(Map<String, dynamic> json,[String? roomCode]){
     return Rate(
       rateClass: json['rateClass'],
       net: json['net'],
@@ -147,6 +148,52 @@ class Rate {
     'roomCode': roomCode,
     'rateBreakDown': rateBreakDown?.toJson(),
   };
+
+  Map<String, dynamic> toJsonOption1({num commission = 0}) => {
+    'net': net,
+    'sellingRate': sellingRate,
+    'sellPrice': _buildSellRate(commission: commission),
+    'boardCode': boardCode,
+    'boardName': boardName,
+    'cancellationPolicies': cancellationPolicies?.map((x) => x.toJson()).toList(),
+    'rooms': rooms,
+    'adults': adults,
+    'children': children,
+    'allotment': allotment,
+    'offers': offers?.map((x) => x.toJson()).toList(),
+    'promotions': promotions?.map((x) => x.toJson()).toList(),
+    'taxes': taxes?.toJson(),
+    'roomCode': roomCode,
+    'rateBreakDown': rateBreakDown?.toJson(),
+  };
+
+
+  String toJsonCompress({num commission = 0}) {
+    return [
+          rateClass,
+          net,
+          sellingRate,
+          _buildSellRate(commission: commission),
+          rateComments,
+          paymentType,
+          packaging,
+          boardCode,
+          boardName,
+          cancellationPolicies?.map((x) => x.toJsonCompress()).toRed("Cancellation"),
+          rooms,
+          adults,
+          children,
+          rateKey,
+          rateType,
+          allotment,
+          rateCommentsId,
+          offers?.map((x) => x.toJsonCompress()).toRed("Offers"),
+          promotions?.map((x) => x.toJsonCompress()).toRed("Promotions"),
+          taxes?.toJsonCompress(),
+          roomCode,
+          rateBreakDown?.toJsonCompress(),
+        ].join(",");
+  }
 
   String _buildSellRate({num commission = 0}){
     var netPrice = num.parse(net ?? "0");

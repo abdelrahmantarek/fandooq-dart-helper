@@ -26,4 +26,11 @@ class ModificationPolicies {
     };
   }
 
+  String toJsonCompress() {
+    return [
+      cancellation,
+      modification,
+    ].join(",");
+  }
+
 }

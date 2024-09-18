@@ -18,6 +18,13 @@ class CancellationPolicy {
     'from': from,
   };
 
+  String toJsonCompress() {
+    return [
+          amount,
+          from,
+        ].join(",");
+  }
+
   CancellationPolicy copyWith({
     String? amount,
     String? from,
