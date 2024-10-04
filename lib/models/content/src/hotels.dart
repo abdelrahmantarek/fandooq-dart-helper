@@ -189,7 +189,37 @@ class HotelContent{
   // }
 
 
-  int get getStars {
+  double get getStars {
+    // Regular expression to capture a number potentially followed by '_<decimal>'
+    var match = RegExp(r'(\d+)(?:_(\d+))?').firstMatch(categoryCode!);
+
+    if (match != null) {
+      var wholePart = int.tryParse(match.group(1)!) ?? 0;
+      var decimalPart = int.tryParse(match.group(2) ?? '0') ?? 0;
+
+      // التعامل مع نصف النجمة (مثل H3_5 يعني 3.5 نجمة)
+      if (decimalPart >= 5) {
+        return wholePart + 0.5;  // نعطيه تصنيف بنصف نجمة إذا كان يحتوي على نصف
+      }
+
+      return wholePart.toDouble();  // تحويل wholePart إلى double
+    }
+
+    // Assume luxury levels for codes with specific keywords
+    if (categoryCode!.contains('LUX')) {
+      return 5.0;
+    }
+
+    // Default based on other key identifiers
+    if (categoryCode!.contains('VTV') || categoryCode!.contains('STD') || categoryCode!.startsWith('H')) {
+      return 3.0;  // Return as double
+    }
+
+    // Default to a middle rating if no other rules match
+    return 0.0;
+  }
+
+  int get getStarsInt {
     // Regular expression to capture a number potentially surrounded by other text
     var match = RegExp(r'(\d+)').firstMatch(categoryCode!);
     if (match != null) {
@@ -306,6 +336,33 @@ class HotelContent{
 
 
   factory HotelContent.fromJson(dynamic json) {
+
+    List<ImageHotel> getImagesSorted() {
+      var image1 = ((json['images'] ?? []) as List)
+          .map((e) => ImageHotel.fromJson(e))
+          .toList();
+
+      // فرز الصور بناءً على النوع "gen" أولاً، ثم بناءً على order
+      image1.sort((a, b) {
+        // إذا كان كلاهما من نوع "gen"، نرتب حسب order
+        if (a.imageTypeCode == 'GEN' && b.imageTypeCode == 'GEN') {
+          return a.order!.compareTo(b.order!);
+        }
+
+        // إذا كان أحدهما من نوع "gen" فقط، نعطيه الأولوية
+        if (a.imageTypeCode == 'GEN' && b.imageTypeCode != 'GEN') {
+          return -1; // a يأتي قبل b
+        } else if (a.imageTypeCode != 'GEN' && b.imageTypeCode == 'GEN') {
+          return 1; // b يأتي قبل a
+        }
+
+        // إذا لم يكن أي منهما من نوع "gen"، نرتب حسب order فقط
+        return a.order!.compareTo(b.order!);
+      });
+
+      return image1;
+    }
+
     return HotelContent(
       S2C: json['S2C'],
       accommodationType: json['accommodationType'] != null ? AccommodationType.fromJson(json['accommodationType'] ) : null,
@@ -331,7 +388,7 @@ class HotelContent{
       exclusiveDeal: json['exclusiveDeal'],
       facilities: ((json['facilities'] ?? []) as List).map((e) => Facility.fromJson(e)).toList(),
       giataCode: json['giataCode'],
-      images: ((json['images'] ?? []) as List).map((e) => ImageHotel.fromJson(e)).toList(),
+      images: getImagesSorted(), // فرز القائمة بناءً على قيمة order
       interestPoints: ((json['interestPoints']  ?? []) as List).map((e) => InterestPoint.fromJson(e)).toList(),
       issues: json['issues'] != null ? ((json['issues'] ?? []) as List).map((e) => Issue.fromJson(e)).toList() : null,
       lastUpdate: json['lastUpdate'],

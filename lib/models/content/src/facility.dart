@@ -313,6 +313,10 @@ class Facility extends Searchable{
     return "";
   }
 
+  String get queryBox{
+    return '$facilityCode$facilityGroupCode';
+  }
+
 }
 
 

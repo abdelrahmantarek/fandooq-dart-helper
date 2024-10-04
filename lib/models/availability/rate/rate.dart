@@ -69,6 +69,92 @@ class Rate {
     return (allotment ?? 0) < 5 && (allotment ?? 0) > 0;
   }
 
+  // String get rateCommentsShort {
+  //   String text = rateComments ?? '';
+  //
+  //
+    // قائمة بالكلمات المفتاحية
+  //   List<String> keywords = [
+  //     'Check-in is any time after',
+  //     'Pool Heat:',
+  //     'Kissimmee Rental Items:',
+  //     'Estimated total amount of taxes & fees for this booking:',
+  //     'Key Collection',
+  //     'Car park',
+  //     'Check-in hour',
+  //     'Identification card at arrival',
+  //     'Minimum check-in age',
+  //     'Online check-in',
+  //     'Self check-in',
+  //     'After hours / emergency:',
+  //     'Phone:',
+  //     'Check-out time is',
+  //     'Photo ID and a major credit card are required at registration',
+  //     'For arrivals after hours, collect welcome pack from the lockbox at the front door of the office',
+  //     'Please note all guests must register with the office by noon the day after arrival'
+  //   ];
+  //
+  //   // إنشاء تعبير منتظم يتضمن الكلمات المفتاحية
+  //   String pattern = keywords.map((keyword) => RegExp.escape(keyword)).join('|');
+  //   RegExp regExp = RegExp(pattern);
+  //
+  //   // قائمة لتخزين الأقسام
+  //   List<Map<String, String>> sections = [];
+  //
+  //   // مؤشر لآخر موقع تم فحصه
+  //   int lastIndex = 0;
+  //
+  //   // العثور على جميع المطابقات
+  //   Iterable<RegExpMatch> matches = regExp.allMatches(text);
+  //
+  //   for (final match in matches) {
+  //     String keyword = match.group(0)!;
+  //     int startIndex = match.start;
+  //
+  //     // الحصول على المحتوى قبل الكلمة المفتاحية
+  //     if (startIndex > lastIndex) {
+  //       String content = text.substring(lastIndex, startIndex).trim();
+  //       if (content.isNotEmpty && sections.isNotEmpty) {
+  //         sections.last['content'] = (sections.last['content'] ?? '') + ' ' + content;
+  //       }
+  //     }
+  //
+  //     // بدء قسم جديد
+  //     sections.add({'title': keyword, 'content': ''});
+  //
+  //     // تحديث مؤشر آخر موقع
+  //     lastIndex = match.end;
+  //   }
+  //
+  //   // إضافة أي محتوى متبقي
+  //   if (lastIndex < text.length) {
+  //     String content = text.substring(lastIndex).trim();
+  //     if (content.isNotEmpty) {
+  //       if (sections.isNotEmpty) {
+  //         sections.last['content'] = (sections.last['content'] ?? '') + ' ' + content;
+  //       } else {
+  //         sections.add({'title': 'Content', 'content': content});
+  //       }
+  //     }
+  //   }
+  //
+  //
+  //   // إرجاع المحتوى المجمع
+  //   return sections.map((section) => '${section['title']} ${section['content']}\n').join("\n");
+  // }
+
+
+
+  String get rateCommentsShort{
+    String text = rateComments ?? '';
+    return text.split(". ").map((e)=>e.trim()).join("\n\n");
+  }
+
+  List<String> get rateCommentsFull{
+    String text = rateComments ?? '';
+    return text.split(". ").map((e)=>e.trim()).toList();
+  }
+
   Rate({
     required this.rateClass,
     required this.net,
