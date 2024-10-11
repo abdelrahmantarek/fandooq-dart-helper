@@ -86,6 +86,20 @@ class Tax {
     );
   }
 
+  num get amountNumber{
+    num amountToNumber(){
+      var amountIn = num.parse((amount ?? "0").replaceAll(",", ""));
+      int amountInCents = (amountIn * 100).toInt();
+      return amountInCents;
+    }
+    var number = amountToNumber();
+    return centsToCurrency(number).abs();
+  }
+
+  num centsToCurrency(num amountInCents) {
+    double amount = amountInCents / 100;
+    return amount;
+  }
 
   // إضافة دالة copyWith
   Tax copyWith({

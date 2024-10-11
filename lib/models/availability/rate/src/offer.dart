@@ -52,50 +52,31 @@ class Offer {
     ].join(",");
   }
 
-  num get amountNumber{
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! Offer) return false;
+    return other.code == code && other.name == name;
+  }
 
+  @override
+  int get hashCode => code.hashCode ^ name.hashCode;
+
+
+  num get amountNumber{
     num amountToNumber(){
       var amountIn = num.parse((amount ?? "0").replaceAll(",", ""));
       int amountInCents = (amountIn * 100).toInt();
       return amountInCents;
     }
-
     var number = amountToNumber();
-
-    return number;
-  }
-
-  // num get amountMoney{
-  //
-  //   num amountToNumber(){
-  //     var amountIn = num.parse((amount ?? "0").replaceAll(",", ""));
-  //     int amountInCents = (amountIn * 100).toInt();
-  //     return amountInCents;
-  //   }
-  //
-  //   var number = amountToNumber();
-  //
-  //   return number;
-  // }
-  //
-
-  main(){
-
-    // var amount = centsToCurrency(amountToStrip()).abs();
-    //
-    // var format = NumberFormat.currency(
-    //     locale: null,
-    //     decimalDigits: 2,
-    //     symbol: ""
-    // ).format(amont).toString();
-    //
-    // print(format);
-
+    return centsToCurrency(number).abs();
   }
 
   num centsToCurrency(num amountInCents) {
     double amount = amountInCents / 100;
     return amount;
   }
+
 
 }
