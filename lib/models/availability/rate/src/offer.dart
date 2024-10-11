@@ -22,6 +22,19 @@ class Offer {
       amount: json['amount'],
     );
   }
+  
+  // copyWith method
+  Offer copyWith({
+    String? code,
+    String? name,
+    String? amount,
+  }) {
+    return Offer(
+      code: code ?? this.code,
+      name: name ?? this.name,
+      amount: amount ?? this.amount,
+    );
+  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -37,6 +50,52 @@ class Offer {
       name,
       amount
     ].join(",");
+  }
+
+  num get amountNumber{
+
+    num amountToNumber(){
+      var amountIn = num.parse((amount ?? "0").replaceAll(",", ""));
+      int amountInCents = (amountIn * 100).toInt();
+      return amountInCents;
+    }
+
+    var number = amountToNumber();
+
+    return number;
+  }
+
+  // num get amountMoney{
+  //
+  //   num amountToNumber(){
+  //     var amountIn = num.parse((amount ?? "0").replaceAll(",", ""));
+  //     int amountInCents = (amountIn * 100).toInt();
+  //     return amountInCents;
+  //   }
+  //
+  //   var number = amountToNumber();
+  //
+  //   return number;
+  // }
+  //
+
+  main(){
+
+    // var amount = centsToCurrency(amountToStrip()).abs();
+    //
+    // var format = NumberFormat.currency(
+    //     locale: null,
+    //     decimalDigits: 2,
+    //     symbol: ""
+    // ).format(amont).toString();
+    //
+    // print(format);
+
+  }
+
+  num centsToCurrency(num amountInCents) {
+    double amount = amountInCents / 100;
+    return amount;
   }
 
 }

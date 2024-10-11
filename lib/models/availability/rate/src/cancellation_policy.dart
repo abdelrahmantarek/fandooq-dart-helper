@@ -36,7 +36,7 @@ class CancellationPolicy {
   }
 
   DateTime get date {
-    return DateTime.parse(from ?? "");
+    return DateTime.parse(from ?? "").toLocal();
   }
 
   bool get hasFreeCancellation{

@@ -68,6 +68,8 @@ class Rate {
   bool get showAllotment{
     return (allotment ?? 0) < 5 && (allotment ?? 0) > 0;
   }
+  
+  
 
   // String get rateCommentsShort {
   //   String text = rateComments ?? '';
