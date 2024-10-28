@@ -69,6 +69,10 @@ class ImageHotel {
     };
   }
 
+  String get giata{
+    return "http://photos.hotelbeds.com/giata/$path";
+  }
+
   String get bigger{
     return "http://photos.hotelbeds.com/giata/bigger/$path";
   }
