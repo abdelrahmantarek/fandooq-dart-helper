@@ -13,14 +13,14 @@ class CancellationPolicy {
       : amount = json['amount'],
         from = json['from'];
 
-  Map<String, dynamic> toJson() => {
-    'amount': amount,
+  Map<String, dynamic> toJson({num commission = 0}) => {
+    'amount': Consts.commission(num.parse(amount ?? "0"),commission).toString(),
     'from': from,
   };
 
-  String toJsonCompress() {
+  String toJsonCompress({num commission = 0}) {
     return [
-          amount,
+          Consts.commission(num.parse(amount ?? "0"),commission).toString(),
           from,
         ].join(",");
   }
